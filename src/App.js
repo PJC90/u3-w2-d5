@@ -12,6 +12,7 @@ function App() {
       <div className="flex-grow-1">
         <HomeMeteo />
       </div>
+
       <FooterMeteo />
     </div>
   )
