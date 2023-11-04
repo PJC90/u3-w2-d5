@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react"
-import { Button, Col, Form, Row } from "react-bootstrap"
-import { Bell, Search } from "react-bootstrap-icons"
+import {  useState } from "react"
+import { Button, Col, Container, Form, Row } from "react-bootstrap"
+import {  Search } from "react-bootstrap-icons"
+import 'react-multi-carousel/lib/styles.css'
+import Forecast from "./Forecast";
+
+
 
 const HomeMeteo = () => {
 
     const [search, setSearch] = useState("")
     const [location, setLocation] = useState(null)
-    const [forecast, setForecast] = useState(null)
+    const [forecast, setForecast] = useState(false)
 
     const handleSearchClick = () => getLocation()
 
     const weatherApi = "http://api.openweathermap.org/geo/1.0/direct?q="
     const forecastApi ="https://api.openweathermap.org/data/2.5/forecast?" 
     const keyPC ="97d74e4cb94f1c1f9090b63d3a82801c"
-    const keyPC2 ="ef6fe5a03e8caf4874bbd80ad9305b01"
     
 
     const getLocation = () => {
@@ -38,10 +41,8 @@ const HomeMeteo = () => {
             .catch(err=> console.log("err", err))
     }
 
-    const getForecast = (lat, lon) => {
-        // fetch(forecastApi +"lat="+ lat +"&lon="+ lon +"&appid="+ keyPC)
+    const getForecast = (lat, lon) => {       
         fetch(`${forecastApi}lat=${lat}&lon=${lon}&appid=${keyPC}&units=metric`)
-        
         .then(res=>{
             if(res.ok){
                 return res.json()
@@ -74,14 +75,13 @@ const HomeMeteo = () => {
               <Col md={2}>
               <Button variant="primary" onClick={handleSearchClick}><Search/></Button>
               </Col>
-            </Row>
+            </Row>        
             <Row>
                 <Col className="text-light">
-                    {forecast && 
-                    <>
-                    <div>{forecast.list[0].main.temp_max}°C</div>
-                    <div>{forecast.list[0].main.temp_min}°C</div>
-                    </>}
+                        {forecast && <div className="text-center my-5">Località: {location[0].name} - {location[0].state} - {location[0].country} </div>}
+                    <Container>
+                        <Forecast forecast={forecast}/>
+                    </Container> 
                 </Col>
             </Row>
             </>

@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 import './App.css'
 import NavbarMeteo from './Components/NavbarMeteo'
 
 import FooterMeteo from './Components/FooterMeteo'
 import HomeMeteo from './Components/HomeMeteo'
+import Ciao from './Components/ciao'
 
 function App() {
   return (
