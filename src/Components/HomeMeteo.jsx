@@ -59,6 +59,8 @@ const HomeMeteo = () => {
         .catch(err=> console.log("err", err))
 
     }
+
+    
     return(
         <>
         <Row className="justify-content-center mt-5">

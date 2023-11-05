@@ -46,13 +46,16 @@ const ForecastToday = (props) => {
                 <Carousel responsive={responsive}>
                         {props.forecast &&                      
                         todayForecast.map((singleForecast)=>{
+                          const date = new Date(singleForecast.dt_txt)
+                          const formattedTime = date.toLocaleTimeString("it-IT",{hour: "2-digit", minute:"2-digit"})
+                          const arrotondaTemp = singleForecast.main.temp.toFixed(0)
                             return(
                                 <div key={singleForecast.dt} className="text-center">
-                                    <div>{singleForecast.dt_txt}</div>
+                                    <div>{formattedTime}</div>
                                     <div>
                                         <img src={`${url}${singleForecast.weather[0].icon}.png`} alt="forecast-image" style={{ height: '100px' }} />
                                     </div>
-                                    <div className="fs-1 ciao">{singleForecast.main.temp}°C</div>
+                                    <div className="fs-1 ciao">{arrotondaTemp}°C</div>
                                     <div>Humidity: {singleForecast.main.humidity} %</div>
                                     <div>Pressure: {singleForecast.main.pressure} hPa</div>
                                     <div>Wind: {singleForecast.wind.speed} m/s</div>      
