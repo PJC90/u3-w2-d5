@@ -2,7 +2,9 @@ import {  useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import {  Search } from "react-bootstrap-icons"
 import 'react-multi-carousel/lib/styles.css'
-import Forecast from "./Forecast";
+import ForecastToday from "./ForecastToday";
+import ForecastTomorrow from "./ForecastTomorrow";
+import ForecastNextDays from "./ForecastNextDays";
 
 
 
@@ -77,13 +79,31 @@ const HomeMeteo = () => {
               </Col>
             </Row>        
             <Row>
-                <Col className="text-light">
+                <Col className="text-light mb-5">
                         {forecast && <div className="text-center my-5">Località: {location[0].name} - {location[0].state} - {location[0].country} </div>}
                     <Container>
-                        <Forecast forecast={forecast}/>
+                    {forecast && <div className="mb-3">OGGI:</div>}
+                    <ForecastToday forecast={forecast}/>
                     </Container> 
                 </Col>
             </Row>
+            <Row>
+                <Col className="text-light mb-5">
+                    <Container>
+                    {forecast && <div className="mb-3">DOMANI:</div>}
+                    <ForecastTomorrow forecast={forecast}/>
+                    </Container> 
+                </Col>
+            </Row>
+            <Row>
+                <Col className="text-light mb-5">
+                    <Container>
+                    {forecast && <div className="mb-3">PROSSIMI GIORNI:</div>}
+                    <ForecastNextDays forecast={forecast}/>
+                    </Container> 
+                </Col>
+            </Row>
+            
             </>
     )
 }

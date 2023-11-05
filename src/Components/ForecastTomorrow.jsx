@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css'
+import 'react-multi-carousel/lib/styles.css';
+import { addDays, isSameDay, parseISO, startOfDay } from 'date-fns';
 
 const responsive = {
     superLargeDesktop: {
@@ -21,17 +22,31 @@ const responsive = {
       items: 1
     }
   };
-
-const Forecast = (props) => {
+const ForecastTomorrow = (props) => {
 
     const url = "http://openweathermap.org/img/wn/"
+    const todayDate = new Date()
+    
 
+    if (!props.forecast || !props.forecast.list) {
+        // Se props.forecast o props.forecast.list è undefined o null, evita di eseguire il resto del codice
+        return null;
+      }
+
+    const tomorrow = addDays(startOfDay(new Date()),1)
+    const tomorrowForecast =  props.forecast.list.filter((singleForecast)=>{
+        
+        const forecastdate = parseISO(singleForecast.dt_txt)
+        //isSameDay(forecastdate, tomorrow) verifica se la data ottenuta corrisponde a domani
+        return isSameDay(forecastdate, tomorrow)
+    })
     
     return(
-            
-                  <Carousel responsive={responsive}>
+        
+         
+                <Carousel responsive={responsive}>
                         {props.forecast &&                      
-                        props.forecast.list.map((singleForecast)=>{
+                        tomorrowForecast.map((singleForecast)=>{
                             return(
                                 <div key={singleForecast.dt} className="text-center">
                                     <div>{singleForecast.dt_txt}</div>
@@ -41,17 +56,14 @@ const Forecast = (props) => {
                                     <div className="fs-1 ciao">{singleForecast.main.temp}°C</div>
                                     <div>Humidity: {singleForecast.main.humidity} %</div>
                                     <div>Pressure: {singleForecast.main.pressure} hPa</div>
-                                    <div>Wind: {singleForecast.wind.speed} m/s</div>
-                                   
-                                        
+                                    <div>Wind: {singleForecast.wind.speed} m/s</div>      
                                 </div> 
                             )
                         })                     
                         }
                   </Carousel>
+            
+           
     )
 }
-export default Forecast
-
- // console.log(singleForecast.weather)
-                            // console.log(`${url}${singleForecast.weather.icon}.png`)
+export default ForecastTomorrow
