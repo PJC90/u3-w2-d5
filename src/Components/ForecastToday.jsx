@@ -40,12 +40,14 @@ const ForecastToday = (props) => {
         return isToday(forecastdate)
     })
     
+    const ifTodayForecastInexistent = todayForecast>0 ? todayForecast : [props.forecast.list[0]]
+    //questo perchè l'ultima previsione del giorno è a mezzanotte, e quindi se si fa una ricerca tipo alle 23 non ti troverebbe niente!
     return(
         
          
                 <Carousel responsive={responsive}>
                         {props.forecast &&                      
-                        todayForecast.map((singleForecast)=>{
+                        ifTodayForecastInexistent.map((singleForecast)=>{
                           const date = new Date(singleForecast.dt_txt)
                           const formattedTime = date.toLocaleTimeString("it-IT",{hour: "2-digit", minute:"2-digit"})
                           const arrotondaTemp = singleForecast.main.temp.toFixed(0)

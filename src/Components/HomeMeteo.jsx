@@ -16,6 +16,7 @@ const HomeMeteo = () => {
 
     const handleSearchClick = () => getLocation()
     const handleSaveLocation = () => localStorage.setItem("savedLocation", JSON.stringify(location))
+    
 
 
     const weatherApi = "http://api.openweathermap.org/geo/1.0/direct?q="
