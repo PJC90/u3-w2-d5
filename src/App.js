@@ -5,16 +5,19 @@ import FooterMeteo from './Components/FooterMeteo'
 import HomeMeteo from './Components/HomeMeteo'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LocalitaSalvate from './Components/LocalitaSalvate'
+import { useState } from 'react'
 
-function App() {
+const App = () => {
+  const [sav, setSav] = useState([])
+
   return (
     <BrowserRouter>
       <div className="d-flex h-100 flex-column">
         <NavbarMeteo />
         <div className="flex-grow-1 ciao">
           <Routes>
-            <Route element={<HomeMeteo />} path="/" />
-            <Route element={<LocalitaSalvate />} path="/savedloc" />
+            <Route element={<HomeMeteo sav={sav} setSav={setSav} />} path="/" />
+            <Route element={<LocalitaSalvate sav={sav} />} path="/savedloc" />
           </Routes>
         </div>
         <FooterMeteo />

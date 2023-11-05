@@ -8,14 +8,14 @@ import InputMeteo from "./InputMeteo";
 
 
 
-const HomeMeteo = () => {
+const HomeMeteo = ({sav, setSav}) => {
 
     const [search, setSearch] = useState("")
     const [location, setLocation] = useState(null)
     const [forecast, setForecast] = useState(false)
 
     const handleSearchClick = () => getLocation()
-    const handleSaveLocation = () => localStorage.setItem("savedLocation", JSON.stringify(location))
+    // const handleSaveLocation = () => localStorage.setItem("savedLocation", JSON.stringify(location))
     
 
 
@@ -85,7 +85,11 @@ const HomeMeteo = () => {
                         {forecast && 
                         <>
                         <div className="text-center mt-5">Località: {location[0].name} - {location[0].state} - {location[0].country}</div>
-                        <div className="text-center mt-3"><Button onClick={handleSaveLocation} variant="primary">Salva Località</Button></div>
+                        <div className="text-center mt-3"><Button onClick={()=>{
+                            if (location && location[0]){
+                                setSav((prevSav)=>[...prevSav, location[0].name])
+                                //prev è il modo in cui accedi alla proprietà precedente di sav
+                            }}} variant="primary">Salva Località</Button></div>
                         </>}
                     <Container>
                     {forecast && <div className="mb-3">OGGI:</div>}
