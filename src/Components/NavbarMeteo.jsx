@@ -1,40 +1,41 @@
-import { Container,  Nav, Navbar } from "react-bootstrap"
-import { Bell, PersonCircle,  } from "react-bootstrap-icons"
+import {  Nav, Navbar } from "react-bootstrap"
+import { CloudSun, PersonCircle,  } from "react-bootstrap-icons"
+import { useLocation, Link } from "react-router-dom"
 
 
 const NavbarMeteo = ()=>{
 
-  
+  const location = useLocation()
 
     return(
-        <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark" >
-        <Container fluid>
+      <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark" >
           <Navbar.Brand href="#home">
-          <Bell/>
+          <CloudSun className="ms-3 fs-1"/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="me-auto">
-            <Nav.Link>
+            <Link to="/" className={location.pathname === '/' ? 'nav-link active' : 'nav-link'}>
               Home
-            </Nav.Link>
-              <Nav.Link>TV Shows</Nav.Link>
-              <Nav.Link>Movies</Nav.Link>
+            </Link>
+            <Link to="/savedloc" className={location.pathname === '/savedloc' ? 'nav-link active' : 'nav-link'}>
+            Località salvate
+            </Link>
               
-              <Nav.Link>My List</Nav.Link>
+              
             </Nav>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse >
           <Nav className="ms-auto d-flex flex-row me-3">
   
             <Nav.Link >
-              <PersonCircle/>
+              <PersonCircle className="me-3 fs-3 text-white"/>
             </Nav.Link> 
               
           </Nav>
         </Navbar.Collapse>
           </Navbar.Collapse>
-        </Container>
+     
       </Navbar>
     )
 }

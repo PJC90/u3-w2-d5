@@ -4,6 +4,7 @@ body,
   height: 100%;
   background-color: black;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,5 +19,5 @@ code {
     monospace;
 }
 .ciao{
-  color: red;
+  color: rgb(0, 174, 255);
 }

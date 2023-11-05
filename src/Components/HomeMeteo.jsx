@@ -1,10 +1,10 @@
 import {  useState } from "react"
-import { Button, Col, Container, Form, Row } from "react-bootstrap"
-import {  Search } from "react-bootstrap-icons"
+import { Alert, Button, Col, Container, Row } from "react-bootstrap"
 import 'react-multi-carousel/lib/styles.css'
 import ForecastToday from "./ForecastToday";
 import ForecastTomorrow from "./ForecastTomorrow";
 import ForecastNextDays from "./ForecastNextDays";
+import InputMeteo from "./InputMeteo";
 
 
 
@@ -15,6 +15,8 @@ const HomeMeteo = () => {
     const [forecast, setForecast] = useState(false)
 
     const handleSearchClick = () => getLocation()
+    const handleSaveLocation = () => localStorage.setItem("savedLocation", JSON.stringify(location))
+
 
     const weatherApi = "http://api.openweathermap.org/geo/1.0/direct?q="
     const forecastApi ="https://api.openweathermap.org/data/2.5/forecast?" 
@@ -33,6 +35,7 @@ const HomeMeteo = () => {
             .then(locationSearch =>{
                 console.log("Località cercata:", locationSearch)
                 setLocation(locationSearch)
+                
                 //estrai lat e lon dalla località ricevuta
                 if(locationSearch && locationSearch.length > 0){
                     const {lat , lon} = locationSearch[0]
@@ -63,26 +66,26 @@ const HomeMeteo = () => {
     
     return(
         <>
-        <Row className="justify-content-center mt-5">
-              <Col xs={12} md={3} className="text-center">
-                <Form.Group>
-                  <Form.Control
-                    type="search"
-                    placeholder="Cerca una località"
-                    value={search}
-                    onChange={(e) =>
-                      setSearch( e.target.value )
-                    }
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={2}>
-              <Button variant="primary" onClick={handleSearchClick}><Search/></Button>
-              </Col>
-            </Row>        
+        <Row>
+            <Col>
+            <InputMeteo search={search} setSearch={setSearch} handleSearchClick={handleSearchClick}/>
+            </Col>
+        </Row>
+            {location && location.length === 0 &&
+            (<Row className="text-center ">
+                <Col xs={4} className="me-auto ms-auto">
+                        <Alert variant="primary" className="text-center my-5">
+                        Località non valida
+                        </Alert>
+                </Col>
+            </Row>)}
             <Row>
                 <Col className="text-light mb-5">
-                        {forecast && <div className="text-center my-5">Località: {location[0].name} - {location[0].state} - {location[0].country} </div>}
+                        {forecast && 
+                        <>
+                        <div className="text-center mt-5">Località: {location[0].name} - {location[0].state} - {location[0].country}</div>
+                        <div className="text-center mt-3"><Button onClick={handleSaveLocation} variant="primary">Salva Località</Button></div>
+                        </>}
                     <Container>
                     {forecast && <div className="mb-3">OGGI:</div>}
                     <ForecastToday forecast={forecast}/>

@@ -56,9 +56,9 @@ const ForecastToday = (props) => {
                                         <img src={`${url}${singleForecast.weather[0].icon}.png`} alt="forecast-image" style={{ height: '100px' }} />
                                     </div>
                                     <div className="fs-1 ciao">{arrotondaTemp}°C</div>
-                                    <div>Humidity: {singleForecast.main.humidity} %</div>
-                                    <div>Pressure: {singleForecast.main.pressure} hPa</div>
-                                    <div>Wind: {singleForecast.wind.speed} m/s</div>      
+                                    <div>Umidità: {singleForecast.main.humidity} %</div>
+                                    <div>Pressione: {singleForecast.main.pressure} hPa</div>
+                                    <div>Vento: {singleForecast.wind.speed} m/s</div>      
                                 </div> 
                             )
                         })                     
