@@ -40,7 +40,7 @@ const ForecastToday = (props) => {
         return isToday(forecastdate)
     })
     
-    const ifTodayForecastInexistent = todayForecast>0 ? todayForecast : [props.forecast.list[0]]
+    const ifTodayForecastInexistent = todayForecast.length > 0 ? todayForecast : [props.forecast.list[0]]
     //questo perchè l'ultima previsione del giorno è a mezzanotte, e quindi se si fa una ricerca tipo alle 23 non ti troverebbe niente!
     return(
         

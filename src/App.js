@@ -8,7 +8,7 @@ import LocalitaSalvate from './Components/LocalitaSalvate'
 import { useState } from 'react'
 
 const App = () => {
-  const [sav, setSav] = useState([])
+  const [locationToSave, setLocationToSave] = useState([])
 
   return (
     <BrowserRouter>
@@ -16,8 +16,19 @@ const App = () => {
         <NavbarMeteo />
         <div className="flex-grow-1 ciao">
           <Routes>
-            <Route element={<HomeMeteo sav={sav} setSav={setSav} />} path="/" />
-            <Route element={<LocalitaSalvate sav={sav} />} path="/savedloc" />
+            <Route
+              element={
+                <HomeMeteo
+                  locationToSave={locationToSave}
+                  setLocationToSave={setLocationToSave}
+                />
+              }
+              path="/"
+            />
+            <Route
+              element={<LocalitaSalvate locationToSave={locationToSave} />}
+              path="/savedloc"
+            />
           </Routes>
         </div>
         <FooterMeteo />

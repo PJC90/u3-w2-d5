@@ -10,7 +10,7 @@ const LocalitaSalvate = (props)=>{
       <>
       <div>Località Salvate:</div>
       <ul>
-      {props.sav.map((loc, i)=>(
+      {props.locationToSave.map((loc, i)=>(
         <li key={i}>{loc}</li>
       ))}
       </ul>
@@ -19,3 +19,5 @@ const LocalitaSalvate = (props)=>{
 }
 
 export default LocalitaSalvate
+
+//manca la parte in cui lanciare le fetch sulle località salvate in modo da avere le previsioni anche su questa pagina
