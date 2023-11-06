@@ -1,10 +1,10 @@
-import { Col, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import { Facebook, Instagram, Twitter, Youtube } from "react-bootstrap-icons"
 
 const FooterMeteo = () => {
 return(
-    <>
     <footer >
+    <Container>
                <Row >
                 <Col className="mb-2 text-center">
                     <Facebook className="text-secondary me-3"/>
@@ -19,8 +19,8 @@ return(
                 </Col>
               </Row>
   
+    </Container>
         </footer>
-    </>
 )
 }
 

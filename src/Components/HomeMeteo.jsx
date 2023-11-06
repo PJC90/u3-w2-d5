@@ -66,7 +66,7 @@ const HomeMeteo = ({locationToSave, setLocationToSave}) => {
 
     
     return(
-        <>
+        <Container fluid>
         <Row>
             <Col>
             <InputMeteo search={search} setSearch={setSearch} handleSearchClick={handleSearchClick}/>
@@ -114,7 +114,7 @@ const HomeMeteo = ({locationToSave, setLocationToSave}) => {
                 </Col>
             </Row>
             
-            </>
+            </Container>
     )
 }
 export default HomeMeteo
